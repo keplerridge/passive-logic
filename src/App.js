@@ -11,7 +11,7 @@ const App = () => {
     if(tankTemp >= 120){
       setPump(false)
     } else if (tankTemp <= 115){
-      setTimeout(pumping(tankTemp), 6000)
+      pumping(tankTemp)
     }
   }, [pump])
 
@@ -36,13 +36,14 @@ const App = () => {
   }
 
 // Quick google search said a well insulated water heater loses about 1/2 degree to 1 degree of temperature per hour
-// I am using that to calculate the heat loss
+// I am using that to calculate the heat loss at 1 degree per hour
+// 1 / 60 / 10
 
   const stagnant = (tankTemp) => {
 
     if(tankTemp >= 120){
       do {
-
+        setTankTemp(tankTemp - (1 / 60 / 10))
       } while (tankTemp >= 120)
     } else {
       setPump(true)
